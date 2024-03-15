@@ -70,5 +70,6 @@ bnc inst(reg)
 plr temp(reg)
 add temp(reg), 1
 add temp(reg), 1
+clc
 bnc temp(reg)
 ```
