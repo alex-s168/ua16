@@ -14,7 +14,7 @@
 | name | encoding | description                                                                       |
 | ---- | -------- | --------------------------------------------------------------------------------- |
 | adc  | 0000ddss | add with carry ss + dd into dd register; overwrites carry flag                    |
-| sbc  | 0001ddss | subtract with carry dd - ss into dd register; overwrites carry flag               |
+| not  | 0001ddss | bitwise not ss and dd register into dd register                                   |
 | ec9  | 0010..ss | extract 9th bit of register ss into carry flag                                    |
 | fwc  | 0011..dd | fills the destination register with the carry flag                                |
 | tst  | 0100..ss | carry flag = 1 if ss register zero else 0                                         |
@@ -22,21 +22,20 @@
 | orr  | 0110ddss | bitwise or dd register with ss into dd register                                   |
 | clc  | 0111...0 | clear carry flag                                                                  |
 | inv  | 0111...1 | invert carry flag                                                                 |
-| stb  | 1000.0rr | `rr <<= 4; rr or= bank;`                                                           |
+| stb  | 1000.0rr | `rr <<= 4; rr or= bank;`                                                          |
 | ldb  | 1000.1rr | bank = rr;                                                                        |
 | bnc  | 1001..rr | branch to address in rr (top 4 bits of address bus are 0) if carry flag not set   |
-| sbr  | 1010vvvv | set branch register to vvvv                                                       |
+| sbr  | 1010vvvv | set bank register to vvvv                                                         |
 | phr  | 1011.0rr | push register rr onto the stack                                                   |
 | plr  | 1011.1rr | pops from stack into register rr                                                  |
 | ---  | 1100eeee | reserved for future use                                                           |
 | mov  | 1101ddss | moves into dd register from ss register                                           |
-| lod  | 1110bbaa | `b <<= 8; b or= *(char *)a;` high 4 bits of address is bank register               |
+| lod  | 1110bbaa | `b <<= 8; b or= *(char *)a;` high 4 bits of address is bank register              |
 | sto  | 1111bbaa | `*(char *)b = a; a >>= 8;` high 4 bits of address is bank register                |
 
 ### Note
 Instructions that overwrite the carry flag:
-- adc
-- sbc
+- adc 
 - ltu
 - tst
 - ec9
@@ -45,7 +44,6 @@ Instructions that overwrite the carry flag:
 Instructions that read the carry flag:
 - fwc
 - adc
-- sbc
 - bnc
 - inv
 
