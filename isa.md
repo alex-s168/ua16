@@ -22,8 +22,9 @@
 | tst  | 0100..ss | carry flag = 1 if ss register zero else 0                                         |
 | ltu  | 0101aabb | carry flag = unsigned **low 4 bits** of aa register less than unsigned **low 4 bits** of bb register        |
 | orr  | 0110ddss | bitwise or **low 8 bits** of dd register with **low 8 bits** of ss register into zero extended dd register  |
-| clc  | 0111...0 | clear carry flag                                                                  |
-| inv  | 0111...1 | invert carry flag                                                                 |
+| clc  | 01110..0 | clear carry flag                                                                  |
+| inv  | 01110..1 | invert carry flag                                                                 |
+| swp  | 01111.rr | swap the low and high byte of the rr register                                     |
 | stb  | 1000.0rr | `rr <<= 4; rr or= bank;`                                                          |
 | ldb  | 1000.1rr | bank = rr;                                                                        |
 | bnc  | 1001..rr | branch to address in rr (top 4 bits of address bus are 0) if carry flag not set   |
@@ -83,11 +84,10 @@ bnc temp(reg)
 
 ### 16 bit or
 ```
-sto temp0(mem), dest(reg)
-sto temp1(mem), src(reg)
 or dest(reg), src(reg)
-lod dest(reg), temp0(mem)
-lod src(reg), temp1(mem)
+swp src(reg)
+swp dest(reg)
 or dest(reg), src(reg)
+swp src(reg)  # only if need old value of src
+swp dest(reg)
 ```
-this requires a few instructions inbetween for the load and store addresses, unless the cpu implements the 3rd reg instructon
