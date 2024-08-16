@@ -20,8 +20,8 @@
 | ec9  | 0010..ss | extract 9th bit of register ss into carry flag                                    |
 | fwc  | 0011..dd | fills the destination register with the carry flag                                |
 | tst  | 0100..ss | carry flag = 1 if ss register zero else 0                                         |
-| ltu  | 0101aabb | carry flag = 1 if aa register less than (unsigned) bb register else 0             |
-| orr  | 0110ddss | bitwise or dd register with ss into dd register                                   |
+| ltu  | 0101aabb | carry flag = unsigned **low 4 bits** of aa register less than unsigned **low 4 bits** of bb register        |
+| orr  | 0110ddss | bitwise or **low 8 bits** of dd register with **low 8 bits** of ss register into zero extended dd register  |
 | clc  | 0111...0 | clear carry flag                                                                  |
 | inv  | 0111...1 | invert carry flag                                                                 |
 | stb  | 1000.0rr | `rr <<= 4; rr or= bank;`                                                          |
@@ -77,3 +77,17 @@ add temp(reg), 1
 clc
 bnc temp(reg)
 ```
+
+| lod  | 1110bbaa | `b <<= 8; b or= *(char *)a;` high 4 bits of address is bank register              |
+| sto  | 1111bbaa | `*(char *)b = a; a >>= 8;` high 4 bits of address is bank register                |
+
+### 16 bit or
+```
+sto temp0(mem), dest(reg)
+sto temp1(mem), src(reg)
+or dest(reg), src(reg)
+lod dest(reg), temp0(mem)
+lod src(reg), temp1(mem)
+or dest(reg), src(reg)
+```
+this requires a few instructions inbetween for the load and store addresses, unless the cpu implements the 3rd reg instructon
