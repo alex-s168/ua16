@@ -6,5 +6,5 @@ This extenson adds the immediate byte and immediate word instruction, which are 
 ## Instructions
 |name|encoding|description|
 |-|-|-|
-|imb|001001dd bbbbbbbb|load 8-bit immediate bbbbbbbb into dd register|
+|imb|001001dd bbbbbbbb|load 8-bit immediate bbbbbbbb into zero extended dd register|
 |imw|001010dd wwwwwwww wwwwwwww|load 16-bit immediate wwwwwwww wwwwwwww into dd register|
