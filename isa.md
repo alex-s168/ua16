@@ -22,11 +22,11 @@
 | tst  | 0100..ss | carry flag = 1 if ss register zero else 0                                         |
 | ltu  | 0101aabb | carry flag = unsigned **low 4 bits** of aa register less than unsigned **low 4 bits** of bb register        |
 | orr  | 0110ddss | bitwise or **low 8 bits** of dd register with **low 8 bits** of ss register into zero extended dd register  |
-| clc  | 01110..0 | clear carry flag                                                                  |
-| inv  | 01110..1 | invert carry flag                                                                 |
-| swp  | 01111.rr | swap the low and high byte of the rr register                                     |
-| stb  | 1000.0rr | `rr <<= 4; rr or= bank;`                                                          |
-| ldb  | 1000.1rr | bank = rr;                                                                        |
+| swp  | 0111..rr | swap the low and high byte of the rr register                                     |
+| stb  | 100000rr | `rr <<= 4; rr or= bank;`                                                          |
+| ldb  | 100001rr | bank = rr;                                                                        |
+| clc  | 10001..0 | clear carry flag                                                                  |
+| inv  | 10001..1 | invert carry flag                                                                 |
 | bnc  | 1001..rr | branch to address in rr (top 4 bits of address bus are 0) if carry flag not set   |
 | sbr  | 1010vvvv | set bank register to vvvv                                                         |
 | phr  | 1011.0rr | push register rr onto the stack                                                   |
