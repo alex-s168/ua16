@@ -11,10 +11,12 @@
 | -- |  SP  | 8    | stack pointer (always loads from top of bank 1111)                                     |
 
 ## Instructions
+(`.` means that it is ignored but should be set to zero because of future extensions)
+
 | name | encoding | description                                                                       |
 | ---- | -------- | --------------------------------------------------------------------------------- |
 | adc  | 0000ddss | add with carry ss + dd into dd register; overwrites carry flag                    |
-| not  | 0001ddss | bitwise not ss and dd register into dd register                                   |
+| not  | 0001ddss | bitwise not ss into dd register                                                   |
 | ec9  | 0010..ss | extract 9th bit of register ss into carry flag                                    |
 | fwc  | 0011..dd | fills the destination register with the carry flag                                |
 | tst  | 0100..ss | carry flag = 1 if ss register zero else 0                                         |
