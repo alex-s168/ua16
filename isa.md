@@ -79,9 +79,6 @@ clc
 bnc temp(reg)
 ```
 
-| lod  | 1110bbaa | `b <<= 8; b or= *(char *)a;` high 4 bits of address is bank register              |
-| sto  | 1111bbaa | `*(char *)b = a; a >>= 8;` high 4 bits of address is bank register                |
-
 ### 16 bit or
 ```
 or dest(reg), src(reg)
